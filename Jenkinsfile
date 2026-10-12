@@ -15,8 +15,12 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'python3 --version'
-                sh 'python3 -m pip --version'
+                sh '''
+                    python3 -m venv .venv
+                    .venv/bin/python -m pip install --upgrade pip
+                    .venv/bin/python -m pip install -r Backend/requirements.txt
+                    .venv/bin/python -m pip install pytest
+                '''
             }
         }
 
