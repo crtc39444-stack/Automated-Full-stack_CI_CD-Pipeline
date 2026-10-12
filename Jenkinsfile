@@ -16,17 +16,19 @@ pipeline {
             }
         }
 
+        
         stage('Run Tests') {
             steps {
                 sh '''
                     docker run --rm \
                       -v "$WORKSPACE:/app" \
-                      -w /app \
+                      -w /app/Backend \
                       python:3.14-slim \
-                      sh -c "pip install -r Backend/requirements.txt pytest && python -m pytest -v Backend/tests"
+                      sh -c "pip install -r requirements.txt pytest && python -m pytest -v tests"
                 '''
             }
         }
+
     }
 
     post {
