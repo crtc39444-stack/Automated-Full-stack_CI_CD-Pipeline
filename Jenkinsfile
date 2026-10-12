@@ -16,10 +16,10 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 sh '''
-                    python3 -m venv .venv
+                    sudo apt install python3.14-venv
                     .venv/bin/python -m pip install --upgrade pip
-                    .venv/bin/python -m pip install -r Backend/requirements.txt
-                    .venv/bin/python -m pip install pytest
+                    .venv/bin/python -m sudo apt install -r Backend/requirements.txt
+                    .venv/bin/python -m sudo apt install pytest
                 '''
             }
         }
