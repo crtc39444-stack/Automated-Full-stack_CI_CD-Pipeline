@@ -1,3 +1,4 @@
+
 pipeline {
     agent any
 
@@ -16,10 +17,10 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 sh '''
-                    sudo apt install python3.14-venv
+                    python3 -m venv .venv
                     .venv/bin/python -m pip install --upgrade pip
-                    .venv/bin/python -m sudo apt install -r Backend/requirements.txt
-                    .venv/bin/python -m sudo apt install pytest
+                    .venv/bin/python -m pip install -r Backend/requirements.txt
+                    .venv/bin/python -m pip install pytest
                 '''
             }
         }
@@ -27,7 +28,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 dir('Backend') {
-                    sh 'python3 -m pytest -v'
+                    sh '../.venv/bin/python -m pytest -v'
                 }
             }
         }
